@@ -1,0 +1,302 @@
+{
+	"info": {
+		"_postman_id": "2376ba6b-34cc-4ec9-839d-05783ef36065",
+		"name": "Album API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/v1/me/following?type=artist",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"v1",
+						"me",
+						"following"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "artist"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creating Playlist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonObject = xml2Json(responseBody);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}",
+					"host": [
+						"{{BASE_URL}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Youtube GET Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"var jsonObject = xml2Json(responseBody);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://youtube.googleapis.com/youtube/v3/playlists?part=snippet&id=PLFh6J1ZHhqNiZaCDlG6PfMMmsPaCgAMkz&key=AIzaSyBzgKEJhumc43F1vZf9lI5rurqT-VRj5p4",
+					"protocol": "https",
+					"host": [
+						"youtube",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"youtube",
+						"v3",
+						"playlists"
+					],
+					"query": [
+						{
+							"key": "part",
+							"value": "snippet"
+						},
+						{
+							"key": "id",
+							"value": "PLFh6J1ZHhqNiZaCDlG6PfMMmsPaCgAMkz"
+						},
+						{
+							"key": "key",
+							"value": "AIzaSyBzgKEJhumc43F1vZf9lI5rurqT-VRj5p4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Playlist",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "tokenType",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer BQArvYas5T-20ddB72SQ_Fx7E6vMYybAqpbFGEor72IFrDN5e08xmz5rGfX_gUW9ZDBHte8hc05UQV75UpZTPvWxmRNx-WKzIlL8kc46iOXglKhhCT3b8wxMKWlNEQqQRPTwl_rZpl4SGrUNbHtfFgBvUoRYgWZLBAD11Fszwn7zGWNyeOwNWif3KUHxkD-vS1_9hcJH8v33SGG8GIYc7rkYEI5P1vlGnblGwc8TzNTJdTqcJZZuj9oh3juRUUvsawjyPCZaeEIdWJotAaDmGz11Paj6vs_EYIi6_zIDqfQy",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"New Playlist\",\"description\":\"New playlist description\",\"public\":false}"
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/v1/users/31lfttscec7innduyiuesjpv2z5e/playlists?user_id=31lfttscec7innduyiuesjpv2z5e",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"v1",
+						"users",
+						"31lfttscec7innduyiuesjpv2z5e",
+						"playlists"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "31lfttscec7innduyiuesjpv2z5e"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Songs to Playlist",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "tokenType",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer BQArvYas5T-20ddB72SQ_Fx7E6vMYybAqpbFGEor72IFrDN5e08xmz5rGfX_gUW9ZDBHte8hc05UQV75UpZTPvWxmRNx-WKzIlL8kc46iOXglKhhCT3b8wxMKWlNEQqQRPTwl_rZpl4SGrUNbHtfFgBvUoRYgWZLBAD11Fszwn7zGWNyeOwNWif3KUHxkD-vS1_9hcJH8v33SGG8GIYc7rkYEI5P1vlGnblGwc8TzNTJdTqcJZZuj9oh3juRUUvsawjyPCZaeEIdWJotAaDmGz11Paj6vs_EYIi6_zIDqfQy",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{BASE_URL}}/v1/playlists/3ZhKloIllsmQonyOM1wLgZ/tracks?uris=spotify%3Atrack%3A6TGX01ExmdHyOG72fqUU3Q&playlist_id=3ZhKloIllsmQonyOM1wLgZ",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"v1",
+						"playlists",
+						"3ZhKloIllsmQonyOM1wLgZ",
+						"tracks"
+					],
+					"query": [
+						{
+							"key": "uris",
+							"value": "spotify%3Atrack%3A6TGX01ExmdHyOG72fqUU3Q"
+						},
+						{
+							"key": "playlist_id",
+							"value": "3ZhKloIllsmQonyOM1wLgZ"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "9dd78a6a-2efd-480d-9ddd-a8af004f36f3",
+			"key": "baseUrl",
+			"value": " https://api.spotify.com/v1/albums"
+		}
+	]
+}
